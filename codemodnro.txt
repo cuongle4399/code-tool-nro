@@ -113,43 +113,36 @@ sau đó paste id sever nhớ ghi thêm dấu phẩy =))
 -- Thêm Lệnh tàn sát quái
 khai báo biến
 public static MyVector listmob= new MyVector();
-sửa hàm findClickToMOB
-thành 
-private Mob findClickToMOB(int px, int py)
-	{
-		int num = 30;
-		Mob mob = null;
-		int num2 = 0;
-		for (int i = 0; i < GameScr.listmob.size(); i++)
+tìm mob2 sau đó ấn tìm đoạn code này
+if (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.isMobMe))
 		{
-			Mob mob2 = (Mob)GameScr.listmob.elementAt(i);
-			if (!mob2.isInvisible())
+			for (int k = 0; k < GameScr.vMob.size(); k++)
 			{
-				int x = mob2.getX();
-				int y = mob2.getY();
-				int w = mob2.getW();
-				int h = mob2.getH();
-				if (this.inRectangle(px, py, x - w / 2 - num, y - h - num, w + num * 2, h + num * 2))
+				Mob mob2 = (Mob)GameScr.vMob.elementAt(k);
+				if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe)
 				{
-					if (mob == null)
-					{
-						mob = mob2;
-						num2 = Res.abs(px - x) + Res.abs(py - y);
-					}
-					else
-					{
-						int num3 = Res.abs(px - x) + Res.abs(py - y);
-						if (num3 < num2)
-						{
-							mob = mob2;
-							num2 = num3;
-						}
-					}
+					global::Char.myCharz().cx = mob2.x;
+					global::Char.myCharz().cy = mob2.y;
+					global::Char.myCharz().mobFocus = mob2;
+					Service.gI().charMove();
+					break;
 				}
 			}
 		}
-		return mob;
-	}
+thay bằng đoạn code :
+if (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.isMobMe))
+		{
+			for (int k = 0; k < GameScr.listmob.size(); k++)
+			{
+				Mob mob2 = (Mob)GameScr.listmob.elementAt(k);
+				if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe)
+				{
+					global::Char.myCharz().mobFocus = mob2;
+					Service.gI().charMove();
+					break;
+				}
+			}
+		}
 làm lệnh phím tìm movenumer
 else if (GameCanvas.keyAsciiPress == 97)
 					{
