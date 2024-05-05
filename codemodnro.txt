@@ -1,0 +1,81 @@
+Dịch ngược mã nguồn bằng dnSpy
+--Lệnh tăng tốc độ game (Gamescr.onchatFormMe)
+if (text.Contains("speed "))
+		{
+			Time.timeScale = (float)int.Parse(text.Replace("speed ", "")); 
+			GameScr.info1.addInfo("Tốc độ game: " + Time.timeScale, 0);
+		}
+--Lệnh mở tap đổi khu (GameSrc.onchatFormMe)
+if (text= "khu")
+{
+Service.gI().openUIZone(); // hàm openUIZone là một hàm mở tap khu
+Gamescr.info1.addInfo("Mở tap đổi khu thành công ",0);
+}
+--Lệnh auto buff đậu khi đệ cần char (char.addinfo)
+if (info == "Sư phụ ơi cho con đậu thần")
+	{
+		GameScr.gI().doUseHP();
+		GameScr.info1.addInfo("Anh Cường vừa cho bé đệ 1 viên đậu", 0);
+--lệnh mod skin npc (Gamescr.oncharFormMe)
+if (text == "skin")
+		{
+			if (global::Char.myCharz().charFocus != null)
+			{
+				global::Char.myCharz().head = global::Char.myCharz().charFocus.head;
+				global::Char.myCharz().body = global::Char.myCharz().charFocus.body;
+				global::Char.myCharz().leg = global::Char.myCharz().charFocus.leg;
+			}
+			if (global::Char.myCharz().npcFocus != null)
+			{
+				global::Char.myCharz().head = global::Char.myCharz().npcFocus.head;
+				global::Char.myCharz().body = global::Char.myCharz().npcFocus.body;
+				global::Char.myCharz().leg = global::Char.myCharz().npcFocus.leg;
+			}
+			if (global::Char.myCharz().mobFocus != null)
+			{
+				global::Char.myCharz().cp1 = global::Char.myCharz().mobFocus.p1;
+				global::Char.myCharz().cp2 = global::Char.myCharz().mobFocus.p2;
+				global::Char.myCharz().cp3 = global::Char.myCharz().mobFocus.p3;
+			}
+			GameScr.info1.addInfo("Đựa moá đẹp zai quá bây ơi =)))", 0);
+			text = string.Empty;
+		}
+		
+--- Lệnh auto nhặt (Gamescr.)// viết hàm nhặt
+đầu tiên kéo xuống cúi gỡ public static bool autonhat
+Viết hàm autonhat
+public static void autonhat()
+	{
+		while (GameScr.anhat)
+		{
+			global::Char.myCharz().searchItem();
+			if (global::Char.myCharz().itemFocus != null)
+			{
+				GameScr.gI().pickItem();
+				global::Char.myCharz().searchItem();
+			}
+			Thread.Sleep(1000); // để sử dụng được hàm này phải khai báo thư viện system.Threading
+		}
+	}
+GameScr.onchatFormMe
+if (text.Contains("nhat"))
+		{
+			GameScr.anhat = !GameScr.anhat;
+			new Thread(new ThreadStart(GameScr.autonhat)).Start();
+			GameScr.info1.addInfo("Auto Lụm lúa: " + (GameScr.anhat ? "Bật" : "Tắt"), 0);
+			text = string.Empty;
+		}
+-- chuyển lệnh sang phím 
+GameCanvas.keyAsciiPress (gỡ movenumber xok tìm)
+cho lệnh nằm trc phần movenumberpad
+else if (GameCanvas.keyAsciiPress == 110) // 110 là mã ascii của phím M
+					{
+						GameScr.anhat = !GameScr.anhat;
+						new Thread(new ThreadStart(GameScr.autonhat)).Start();
+						GameScr.info1.addInfo("Auto Lụm lúa: " + (GameScr.anhat ? "Bật" : "Tắt"), 0);
+					}
+else if (GameCanvas.keyAsciiPress == 109) // 109 là mã ascii của phím N
+					{
+						Service.gI().openUIZone();
+						GameScr.info1.addInfo("Mở tap chuyển khu", 0);
+-- 
