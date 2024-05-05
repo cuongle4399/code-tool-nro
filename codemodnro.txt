@@ -135,7 +135,8 @@ if (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus 
 			for (int k = 0; k < GameScr.listmob.size(); k++)
 			{
 				Mob mob2 = (Mob)GameScr.listmob.elementAt(k);
-				if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe)
+				if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe) 
+                                // if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe && mob2.levelBoss!=1) cái này là né siêu quái
 				{
 					global::Char.myCharz().mobFocus = mob2;
 					Service.gI().charMove();
