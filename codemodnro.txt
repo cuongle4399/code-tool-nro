@@ -110,3 +110,79 @@ long num5 = (long) skill.coolDown - mSystem.currentTimeMillis() + skill.lastTime
                     mFont.CENTER, mFont.tahoma_7b_red);
 -- Cách add thêm sever (tìm class : ServerListScreen  xok tìm "Vũ trụ")
 sau đó paste id sever nhớ ghi thêm dấu phẩy =))
+-- Thêm Lệnh tàn sát quái
+khai báo biến
+public static MyVector listmob= new MyVector();
+sửa hàm findClickToMOB
+thành 
+private Mob findClickToMOB(int px, int py)
+	{
+		int num = 30;
+		Mob mob = null;
+		int num2 = 0;
+		for (int i = 0; i < GameScr.listmob.size(); i++)
+		{
+			Mob mob2 = (Mob)GameScr.listmob.elementAt(i);
+			if (!mob2.isInvisible())
+			{
+				int x = mob2.getX();
+				int y = mob2.getY();
+				int w = mob2.getW();
+				int h = mob2.getH();
+				if (this.inRectangle(px, py, x - w / 2 - num, y - h - num, w + num * 2, h + num * 2))
+				{
+					if (mob == null)
+					{
+						mob = mob2;
+						num2 = Res.abs(px - x) + Res.abs(py - y);
+					}
+					else
+					{
+						int num3 = Res.abs(px - x) + Res.abs(py - y);
+						if (num3 < num2)
+						{
+							mob = mob2;
+							num2 = num3;
+						}
+					}
+				}
+			}
+		}
+		return mob;
+	}
+làm lệnh phím tìm movenumer
+else if (GameCanvas.keyAsciiPress == 97)
+					{
+						if (GameScr.listmob.size() > 0)
+						{
+							GameScr.isAutoPlay = !GameScr.isAutoPlay;
+							GameScr.canAutoPlay = !GameScr.canAutoPlay;
+						}
+						else
+						{
+							GameScr.info1.addInfo("Thêm quái cái đã bạn êi !!", 0);
+						}
+làm lệnh phông chữ 
+if (GameScr.isAutoPlay && GameScr.canAutoPlay)
+			{
+				mFont.tahoma_7.drawString(g, "Tàn sát: đang Bật", 50, 200, 0);
+			}					}
+làm lệnh tìm onchatmefrom
+if (text.Contains("add"))
+		{
+			GameScr.listmob.addElement(global::Char.myCharz().mobFocus);
+			GameScr.info1.addInfo("Đã thêm được quái vào danh sách rồi e iu =))", 0);
+			text = string.Empty;
+		}
+		if (text.Contains("xoa"))
+		{
+			GameScr.listmob.removeElement(global::Char.myCharz().mobFocus);
+			GameScr.info1.addInfo("Đã cho cook khỏi danh sách", 0);
+			text = string.Empty;
+		}
+		if (text.Contains("delete"))
+		{
+			GameScr.listmob.removeAllElements();
+			GameScr.info1.addInfo("Đã cho cook tất cả", 0);
+			text = string.Empty;
+		}
