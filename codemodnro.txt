@@ -78,4 +78,35 @@ else if (GameCanvas.keyAsciiPress == 109) // 109 là mã ascii của phím N
 					{
 						Service.gI().openUIZone();
 						GameScr.info1.addInfo("Mở tap chuyển khu", 0);
--- 
+-- Hiển thị thông tin (GameSrc) tìm pa17 xoá toàn bộ dữ liệu trong phần đoạn is dưới phần GameScr.resetTranslate(g);
+rồi paste
+mFont.tahoma_7b_dark.drawString(g, "DEV: CƯỜNG LÊ", 240, 12, mFont.CENTER, mFont.tahoma_7b_yellow);
+			mFont.tahoma_7b_white.drawString(g, "Thời gian: " + DateTime.Now, 70, GameCanvas.h - 250, mFont.CENTER, mFont.tahoma_7b_dark);
+			mFont.tahoma_7b_white.drawString(g, string.Concat(new object[]
+			{
+				"Map: ",
+				TileMap.mapNames[TileMap.mapID],
+				" Khu",
+				TileMap.zoneID
+			}), 70, GameCanvas.h - 240, mFont.CENTER, mFont.tahoma_7b_dark);
+			mFont.tahoma_7b_white.drawString(g, string.Concat(new object[]
+			{
+				"Ngọc xanh: ",
+				global::Char.myCharz().luong,
+				"     Vàng: ",
+				global::Char.myCharz().xu
+			}), 70, GameCanvas.h - 230, mFont.CENTER, mFont.tahoma_7b_dark);
+			mFont.tahoma_7b_white.drawString(g, string.Concat(new object[]
+			{
+				"HP: ",
+				Mathf.Round((float)global::Char.myCharz().cHP / (float)global::Char.myCharz().cHPFull * 100f),
+				"% MP: ",
+				Mathf.Round((float)global::Char.myCharz().cMP / (float)global::Char.myCharz().cMPFull * 100f)
+			}), 70, GameCanvas.h - 220, mFont.CENTER, mFont.tahoma_7b_dark);
+Hiển thị thời gian hồi chiêu [tìm this.paintGamePad(g)]
+paste đoạn này vào phần cuối cùng trong đoạn của if (skill != null)
+long num5 = (long) skill.coolDown - mSystem.currentTimeMillis() + skill.lastTimeUseThisSkill;
+                    mFont.tahoma_7_white.drawString(g, (num5 > 0L) ? string.Concat(num5 / 1000L): string.Empty, GameScr.xSkill + GameScr.xS[i] + 14, GameScr.yS[i]+8,
+                    mFont.CENTER, mFont.tahoma_7b_red);
+-- Cách add thêm sever (tìm class : ServerListScreen  xok tìm "Vũ trụ")
+sau đó paste id sever nhớ ghi thêm dấu phẩy =))
