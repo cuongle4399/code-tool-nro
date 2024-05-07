@@ -1,4 +1,4 @@
-Dịch ngược mã nguồn bằng dnSpy
+Dịch ngược mã nguồn bằng dnSpy--viết hàm sau 
 --Lệnh tăng tốc độ game (Gamescr.onchatFormMe)
 if (text.Contains("speed "))
 		{
@@ -44,24 +44,26 @@ if (text == "skin")
 --- Lệnh auto nhặt (Gamescr.)// viết hàm nhặt
 đầu tiên kéo xuống cúi gỡ public static bool autonhat
 Viết hàm autonhat
-public static void autonhat()
-	{
-		while (GameScr.anhat)
-		{
-			global::Char.myCharz().searchItem();
-			if (global::Char.myCharz().itemFocus != null)
-			{
-				GameScr.gI().pickItem();
-				global::Char.myCharz().searchItem();
-			}
-			Thread.Sleep(1000); // để sử dụng được hàm này phải khai báo thư viện system.Threading
-		}
-	}
+public static void autonhat() {
+    if (Char.myCharz().itemFocus == null) {
+        for (int i = 0; i < GameScr.vItemMap.size(); i++) {
+            ItemMap itemMap = (ItemMap) GameScr.vItemMap.elementAt(i);
+            int x = Math.abs(Char.myCharz().cx - itemMap.x);
+            int y = Math.abs(Char.myCharz().cy - itemMap.y);
+
+            if (Char.myCharz().charID != itemMap.playerId || itemMap.playerId != -188 &&
+                x <= 48 && y <= 48 && itemMap.template.id != 1 && itemMap.template.id != 225 &&
+                !GameScr.gI().isBagFull()) {
+                Char.myCharz().itemFocus = itemMap;
+                return;
+            }
+        }
+    }
+}
 GameScr.onchatFormMe
 if (text.Contains("nhat"))
 		{
 			GameScr.anhat = !GameScr.anhat;
-			new Thread(new ThreadStart(GameScr.autonhat)).Start();
 			GameScr.info1.addInfo("Auto Lụm lúa: " + (GameScr.anhat ? "Bật" : "Tắt"), 0);
 			text = string.Empty;
 		}
@@ -132,11 +134,22 @@ if (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus 
 thay bằng đoạn code :
 if (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.isMobMe))
 		{
+			if(anhat){
+                  GameScr.autonhat();
+
+                  if (Char.myCharz().itemFocus!=null){
+                  GameScr.gI().pickItem();
+				  GameScr.autonhat();
+            }
+				  else {
+					Char.myCharz().itemFocus = null;
+}
+}
+
 			for (int k = 0; k < GameScr.listmob.size(); k++)
 			{
 				Mob mob2 = (Mob)GameScr.listmob.elementAt(k);
-				if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe) 
-                                // if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe && mob2.levelBoss!=1) cái này là né siêu quái
+				if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe && mob2.levelBoss != 1)
 				{
 					global::Char.myCharz().mobFocus = mob2;
 					Service.gI().charMove();
@@ -180,3 +193,107 @@ if (text.Contains("add"))
 			GameScr.info1.addInfo("Đã cho cook tất cả", 0);
 			text = string.Empty;
 		}
+-- Hiển thị danh sách boss
+Khai báo biến
+public MyVector BossVip= new MyVector();
+viết hàm class trong GameScr
+using UnityEngine;
+
+public class ShowBoss
+	{
+		// Token: 0x06000AD2 RID: 2770
+		public ShowBoss(string a)
+		{
+			a = a.Replace("BOSS ", "");
+			a = a.Replace("vừa xuất hiện tại", "|");
+			a = a.Replace("khu vực", "|");
+			string[] array = a.Split(new char[]
+			{
+				'|'
+			});
+			this.nameBoss = array[0].Trim();
+			this.mapName = array[1].Trim();
+			this.mapID = this.MapId(this.mapName);
+			this.time = DateTime.Now;
+		}
+
+		// Token: 0x06000AD3 RID: 2771
+		public int MapId(string a)
+		{
+			for (int i = 0; i < TileMap.mapNames.Length; i++)
+			{
+				if (TileMap.mapNames[i].Equals(a))
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+
+		// Token: 0x06000AD4 RID: 2772
+		public void paintBoss(mGraphics a, int b, int c, int d)
+		{
+			TimeSpan timeSpan = DateTime.Now.Subtract(this.time);
+			int num = (int)timeSpan.TotalSeconds;
+			mFont mFont = mFont.tahoma_7_yellow;
+			if (TileMap.mapID == this.mapID)
+			{
+				mFont = mFont.tahoma_7_red;
+				for (int i = 0; i < GameScr.vCharInMap.size(); i++)
+				{
+					if (((global::Char)GameScr.vCharInMap.elementAt(i)).cName.Equals(this.nameBoss))
+					{
+						mFont = mFont.tahoma_7b_blue;
+						break;
+					}
+				}
+			}
+			mFont.drawString(a, string.Concat(new string[]
+			{
+				this.nameBoss,
+				" - ",
+				this.mapName,
+				" - ",
+				(num < 60) ? (num + "s") : (timeSpan.Minutes + "p"),
+				"trước",
+				" <<< "
+			}), b, c, d);
+		}
+
+		// Token: 0x040015D9 RID: 5593
+		public string nameBoss;
+
+		// Token: 0x040015DA RID: 5594
+		public string mapName;
+
+		// Token: 0x040015DB RID: 5595
+		public int mapID;
+
+		// Token: 0x040015DC RID: 5596
+		public DateTime time;
+	}
+}
+Vô hàm GameScr.ChatVip.
+paste cái này vào hàm chatvip. Đây là điều kiện riêng nên ko đặt zo cái if hay cái nào hết 
+        if (chatVip.StartsWith("BOSS"))
+          {
+        this.BossVip.addElement(new ShowBoss (chatVip));
+              if (this.BossVip.size() > 5)
+                  {                
+                      this.BossVip.removeElementAt(0);
+                  }
+			  }
+tìm pa17. [********đặt sau phần 
+if (!GameScr.isPaintOther && GameScr.isPaintRada == 1 && !GameCanvas.panel.isShow)
+		{
+			this.paintInfoBar(g);
+		}
+*********]
+int num = 42;
+            for (int i = 0; i < this.BossVip.size(); i++)
+				{
+                   g.setColor(2721889, 0.5f);
+                   g.fillRect(GameCanvas.w -23, num +2, 25, 9);
+                   ((ShowBoss)this.BossVip.elementAt(i)).paintBoss(g, GameCanvas.w -2, num, mFont.RIGHT);
+                            num += 10;
+}
