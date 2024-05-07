@@ -269,3 +269,29 @@ int num = 42;
                    ((ShowBoss)this.BossVip.elementAt(i)).paintBoss(g, GameCanvas.w -2, num, mFont.RIGHT);
                             num += 10;
 }
+-- Lệnh fake vàng, ngọc, sm,tn, tên nhân vật
+if (text.Contains("vang "))
+		{
+			global::Char.myCharz().xu = (long)int.Parse(text.Replace("vang ", ""));
+			GameScr.info1.addInfo("Bạn nhận " + global::Char.myCharz().xu.ToString("#,##0") + "vô tài khoản", 0);
+		}
+		if (text.Contains("ngoc"))
+		{
+			global::Char.myCharz().luong = int.Parse(text.Replace("ngoc", ""));
+			GameScr.info1.addInfo("Bạn nhận " + global::Char.myCharz().luong.ToString("#,##0") + "vô tài khoản", 0);
+		}
+		if (text.Contains("sm"))
+		{
+			global::Char.myCharz().cPower = (long)int.Parse(text.Replace("sm", ""));
+			GameScr.info1.addInfo("Bạn nhận " + global::Char.myCharz().cPower.ToString("#,##0") + "sức mạnh", 0);
+		}
+		if (text.Contains("tn "))
+		{
+			global::Char.myCharz().cTiemNang = (long)int.Parse(text.Replace("tn", ""));
+			GameScr.info1.addInfo("Bạn nhận " + global::Char.myCharz().cTiemNang.ToString("#,##0") + "Tiềm Năng", 0);
+		}
+		if (text.Contains("id"))
+		{
+			global::Char.myCharz().cName = text.Replace("ngoc", "");
+			GameScr.info1.addInfo("Từ nay hãy gọi Bố là:  " + global::Char.myCharz().cName, 0);
+		}
