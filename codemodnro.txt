@@ -51,7 +51,7 @@ public static void autonhat(){
                  GameScr.gI().pickItem();
                  global::Char.myCharz().searchItem();
                   }
-           Thread.Sleep(500);
+           Thread.Sleep(1000);
 }
 }
 GameScr.onchatFormMe
@@ -194,79 +194,59 @@ viết hàm class trong GameScr
 using UnityEngine;
 
 public class ShowBoss
-	{
-		// Token: 0x06000AD2 RID: 2770
-		public ShowBoss(string a)
-		{
-			a = a.Replace("BOSS ", "");
-			a = a.Replace("vừa xuất hiện tại", "|");
-			a = a.Replace("khu vực", "|");
-			string[] array = a.Split(new char[]
-			{
-				'|'
-			});
-			this.nameBoss = array[0].Trim();
-			this.mapName = array[1].Trim();
-			this.mapID = this.MapId(this.mapName);
-			this.time = DateTime.Now;
-		}
+{
+    public ShowBoss(string a)
+    {
+        a = a.Replace("BOSS ", "");
+        a = a.Replace("vừa xuất hiện tại", "|");
+        a = a.Replace("khu vực", "|");
+        string[] array = a.Split(new char[] { '|' });
+        this.nameBoss = array[0].Trim(); // Get NameBoss
+        this.mapName = array[1].Trim(); // Get Map Name
+        this.mapID = this.MapId(this.mapName); // Get Map id để đền map
+        this.time = DateTime.Now;
+    }
 
-		// Token: 0x06000AD3 RID: 2771
-		public int MapId(string a)
-		{
-			for (int i = 0; i < TileMap.mapNames.Length; i++)
-			{
-				if (TileMap.mapNames[i].Equals(a))
-				{
-					return i;
-				}
-			}
-			return -1;
-		}
+    public int MapId(string a)
+    {
+        for (int i = 0; i < TileMap.mapNames.Length; i++)
+        {
+            if (TileMap.mapNames[i].Equals(a))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 
-		// Token: 0x06000AD4 RID: 2772
-		public void paintBoss(mGraphics a, int b, int c, int d)
-		{
-			TimeSpan timeSpan = DateTime.Now.Subtract(this.time);
-			int num = (int)timeSpan.TotalSeconds;
-			mFont mFont = mFont.tahoma_7_yellow;
-			if (TileMap.mapID == this.mapID)
-			{
-				mFont = mFont.tahoma_7_red;
-				for (int i = 0; i < GameScr.vCharInMap.size(); i++)
-				{
-					if (((global::Char)GameScr.vCharInMap.elementAt(i)).cName.Equals(this.nameBoss))
-					{
-						mFont = mFont.tahoma_7b_blue;
-						break;
-					}
-				}
-			}
-			mFont.drawString(a, string.Concat(new string[]
-			{
-				this.nameBoss,
-				" - ",
-				this.mapName,
-				" - ",
-				(num < 60) ? (num + "s") : (timeSpan.Minutes + "p"),
-				"trước",
-				" <<< "
-			}), b, c, d);
-		}
-
-		// Token: 0x040015D9 RID: 5593
-		public string nameBoss;
-
-		// Token: 0x040015DA RID: 5594
-		public string mapName;
-
-		// Token: 0x040015DB RID: 5595
-		public int mapID;
-
-		// Token: 0x040015DC RID: 5596
-		public DateTime time;
-	}
-}
+    public void paintBoss(mGraphics a, int b, int c, int d)
+    {
+        TimeSpan timeSpan = DateTime.Now.Subtract(this.time);
+        int num = (int)timeSpan.TotalSeconds;
+        mFont mFont = mFont.tahoma_7_yellow;
+        if (TileMap.mapID == this.mapID)
+        {
+            mFont = mFont.tahoma_7_red;
+            for (int i = 0; i < GameScr.vCharInMap.size(); i++)
+            {
+                if (((global::Char)GameScr.vCharInMap.elementAt(i)).cName.Equals(this.nameBoss))
+                {
+                    mFont = mFont.tahoma_7b_blue;
+                    break;
+                }
+            }
+        }
+        mFont.drawString(a, string.Concat(new string[]
+        {
+            this.nameBoss,
+            " - ",
+            this.mapName,
+            " - ",
+            (num < 60) ? (num + "s") : (timeSpan.Minutes + "p"),
+            "trước",
+            " <<< "
+        }), b, c, d);
+    }
 Vô hàm GameScr.ChatVip.
 paste cái này vào hàm chatvip. Đây là điều kiện riêng nên ko đặt zo cái if hay cái nào hết 
         if (chatVip.StartsWith("BOSS"))
@@ -278,10 +258,8 @@ paste cái này vào hàm chatvip. Đây là điều kiện riêng nên ko đặ
                   }
 			  }
 tìm pa17. [********đặt sau phần 
-if (!GameScr.isPaintOther && GameScr.isPaintRada == 1 && !GameCanvas.panel.isShow)
-		{
-			this.paintInfoBar(g);
-		}
+GameScr.resetTranslate(g);
+		this.paint_xp_bar(g);
 *********]
 int num = 42;
             for (int i = 0; i < this.BossVip.size(); i++)
