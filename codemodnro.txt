@@ -292,6 +292,6 @@ if (text.Contains("vang "))
 		}
 		if (text.Contains("id"))
 		{
-			global::Char.myCharz().cName = text.Replace("ngoc", "");
+			global::Char.myCharz().cName = text.Replace("id", "");
 			GameScr.info1.addInfo("Từ nay hãy gọi Bố là:  " + global::Char.myCharz().cName, 0);
 		}
