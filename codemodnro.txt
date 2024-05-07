@@ -44,21 +44,15 @@ if (text == "skin")
 --- Lệnh auto nhặt (Gamescr.)// viết hàm nhặt
 đầu tiên kéo xuống cúi gỡ public static bool autonhat
 Viết hàm autonhat
-public static void autonhat() {
-    if (Char.myCharz().itemFocus == null) {
-        for (int i = 0; i < GameScr.vItemMap.size(); i++) {
-            ItemMap itemMap = (ItemMap) GameScr.vItemMap.elementAt(i);
-            int x = Math.abs(Char.myCharz().cx - itemMap.x);
-            int y = Math.abs(Char.myCharz().cy - itemMap.y);
-
-            if (Char.myCharz().charID != itemMap.playerId || itemMap.playerId != -188 &&
-                x <= 48 && y <= 48 && itemMap.template.id != 1 && itemMap.template.id != 225 &&
-                !GameScr.gI().isBagFull()) {
-                Char.myCharz().itemFocus = itemMap;
-                return;
-            }
-        }
-    }
+public static void autonhat(){
+        while(GameScr.anhat){
+            global::Char.myCharz().searchItem();
+            if(global:: Char.myCharz().itemFocus != null){
+                 GameScr.gI().pickItem();
+                 global::Char.myCharz().searchItem();
+                  }
+           Thread.Sleep(500);
+}
 }
 GameScr.onchatFormMe
 if (text.Contains("nhat"))
