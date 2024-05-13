@@ -295,3 +295,25 @@ if (text.Contains("vang "))
 			global::Char.myCharz().cName = text.Replace("id", "");
 			GameScr.info1.addInfo("Từ nay hãy gọi Bố là:  " + global::Char.myCharz().cName, 0);
 		}
+--auto trỏ vào boss
+#startSever
+	public static void AutoFocus()
+	{
+		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
+		{
+			global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
+			char name = char.Parse(@char.cName.Substring(0, 1));
+			if (name >= 'A' && name <= 'Z' && !@char.cName.StartsWith("Đệ tử"))
+			{
+				global::Char.myCharz().npcFocus = null;
+				global::Char.myCharz().charFocus = null;
+				global::Char.myCharz().mobFocus = null;
+				global::Char.myCharz().charFocus = @char;
+			}
+		}
+	}
+#moveNumber
+	else if (GameCanvas.keyAsciiPress == 'f')
+				{
+					GameScr.AutoFocus();
+				}
