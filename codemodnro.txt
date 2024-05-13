@@ -316,6 +316,7 @@ if (text.Contains("vang "))
 	else if (GameCanvas.keyAsciiPress == 'f')
 				{
 					GameScr.AutoFocus();
+                                        GameScr.info1.addInfo("gim boss", 0);
 				}
 -- hiển thị số sao trên trang bị
 #panel
