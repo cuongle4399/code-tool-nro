@@ -317,3 +317,11 @@ if (text.Contains("vang "))
 				{
 					GameScr.AutoFocus();
 				}
+-- hiển thị số sao trên trang bị
+#panel
+tìm g.fillRect(num5, num6, num7, num8); 
+thấy if(item.itemOption=!null) là chuẩn
+thêm 1 if vào phần for()
+		else if(item.itemOption[k].optionTemplate.id == 107 || item.itemOption[k].optionTemplate.id == 102) {
+										mFont.tahoma_7b_red.drawString(g,item.itemOption[k].param + "sao",num3+110,num4+1,0);
+										}
