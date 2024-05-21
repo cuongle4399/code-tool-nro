@@ -1,4 +1,4 @@
-## Demo mob nro 
+## Demo mod nro 
 <img src="https://github.com/cuongle4399/cuongle4399/blob/main/20240521-0328-05.1597199.gif" >
 <p><b>MOD tự động buff đậu khi đệ kêu</b></p>
 <p><b>lệnh đặc biệt tăng tốc độ chạy và độ cool ngầu :))) chat "cuongle"</b></p>
@@ -28,7 +28,7 @@ id + [], </b>
 </p>
 vd: vang 8888 </b>
 
-## Click vào đây để tải mob <br>
+## Click vào đây để tải mod <br>
 <a href="https://drive.google.com/file/d/1mWO4CcEo1vhQpblyNjIP2FWVoWPB-pAw/view?usp=drive_link" alt="NRO">
     <img width="100" src="https://images.spiderum.com/sp-images/f9aabbc0449311ec885eab61bad4d8bd.png" target="_blank" />
   </a> 
