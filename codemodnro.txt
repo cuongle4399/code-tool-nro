@@ -1,4 +1,4 @@
-Dịch ngược mã nguồn bằng dnSpy--viết hàm sau 
+Dịch ngược mã nguồn bằng dnSpy
 -- Speed game (Gamescr.onchatFormMe)
 if (text.Contains("speed "))
 		{
@@ -168,7 +168,7 @@ if (GameScr.isAutoPlay && GameScr.canAutoPlay)
 			{
 				mFont.tahoma_7.drawString(g, "Tàn sát: đang Bật", 50, 200, 0);
 			}					}
-làm lệnh tìm onchatmefrom
+#onchatmefrom
 if (text.Contains("add"))
 		{
 			GameScr.listmob.addElement(global::Char.myCharz().mobFocus);
