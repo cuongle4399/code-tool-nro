@@ -20,11 +20,14 @@ xoá quái khỏi danh sách pem chat "xoa"
 xoá all quái khỏi danh sách cần pem chat "delete"
 Ấn phím "a" trên bàn phím để mở auto tàn sát</b></p>
 <p><b>fake vàng, tn, ngọc, id game
-vang + [] vd: vang 8888
-ngoc + []
-tn + []
-sm + []
-id + []</b></p>
+vang + [] ,
+ngoc + [],
+tn + [],
+sm + [],
+id + [], </b>
+</p>
+vd: vang 8888 </b>
+
 ## Click vào đây để tải mob <br>
 <a href="https://drive.google.com/file/d/1mWO4CcEo1vhQpblyNjIP2FWVoWPB-pAw/view?usp=drive_link" alt="NRO">
     <img width="100" src="https://images.spiderum.com/sp-images/f9aabbc0449311ec885eab61bad4d8bd.png" target="_blank" />
