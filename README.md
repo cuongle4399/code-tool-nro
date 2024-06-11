@@ -29,6 +29,6 @@ id + [], </b>
 vd: vang 8888 </b>
 
 ## Click vào đây để tải mod <br>
-<a href="https://github.com/cuongle4399/shop_ban_nick_nro/blob/master/file/mob%20nro%20version%202.3.rar" alt="NRO">
+<a href="https://drive.google.com/file/d/1rmCWWenRtB3GzNpn5q8vtO5BcikZtoau/view?usp=sharing" alt="NRO">
     <img width="100" src="https://images.spiderum.com/sp-images/f9aabbc0449311ec885eab61bad4d8bd.png" target="_blank" />
   </a> 
