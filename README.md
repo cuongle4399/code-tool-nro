@@ -32,3 +32,4 @@ vd: vang 8888 </b>
 <a href="https://drive.google.com/file/d/1rmCWWenRtB3GzNpn5q8vtO5BcikZtoau/view?usp=sharing" alt="NRO">
     <img width="100" src="https://images.spiderum.com/sp-images/f9aabbc0449311ec885eab61bad4d8bd.png" target="_blank" />
   </a> 
+  <h1>Tải phiên bản mới nhất vip pro hơn ở <a href ="https://cuongle4399.github.io/shop_ban_nick_nro/index.html">shop nro cuong le</a></h1>
